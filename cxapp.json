@@ -1,0 +1,36 @@
+{
+    "name" : "cxappserver"
+    ,"apps" : 
+    [
+        {
+            "name" : "cxapp"
+            ,"paths" :
+            [
+       
+                {
+                    "public" : "/cxapp"
+                    ,"source" : "/source/app/cxapp"
+                    ,"js" : 
+                    [
+                        {
+                            "script" : "/js/main.js"
+                            ,"src" : "/main.coffee"
+                        }
+                    ]
+                    ,"css" : 
+                    [
+                        {
+                            "script" : "/css/main.css"
+                            ,"src" : "/styles/main.styl"
+                        }
+                    ]
+                }
+                    
+                
+            ]
+        }
+
+
+    ]
+    
+}

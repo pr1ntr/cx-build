@@ -1,18 +1,14 @@
-var express = require('express'),
-  http = require('http'),
-  path = require('path'),
-  coffee = require('coffee-script'),
-  uglify = require('uglify-js');
+
  
 
 var BuildJS = require('./buildjs');
 var BuildCSS = require('./buildcss');
 
+/*
+var b = new BuildJS('/source/apps/cxapp/', 'main.coffee', '/public/cxapp/js/main.js');
+var c = new BuildCSS('/source/apps/cxapp/styles/', 'main.styl','/public/css/cxapp/main.css');
 
-var b = new BuildJS('/source/app/', 'main.coffee', '/public/js/main.js');
-var c = new BuildCSS('/source/styles/', 'main.styl','/public/css/main.css');
-
-
+*/
 var app = express();
 var debug = false;
 
@@ -27,7 +23,7 @@ var allowCrossDomain = function(req, res, next) {
 
 app.configure(function()
 {
-  app.set('port', process.env.PORT || 3030);
+  app.set('port', process.env.PORT || 105);
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
@@ -57,8 +53,7 @@ app.configure('production', function()
 });
 
 
-
-
+/*
 app.get('/css/main.css' , function (req, res)
 {
   this.onBuild = function (res)
@@ -89,7 +84,7 @@ app.get('/js/main.js' , function (req,res)
 });
 
 app.get('/', function(req, res) {   res.sendfile(path.join(__dirname, "/public/index.html")); });
-
+*/
 app.use(express.static(path.join(__dirname, '/public')));
 http.createServer(app).listen(app.get('port'), function()
 {
