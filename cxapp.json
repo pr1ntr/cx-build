@@ -1,15 +1,18 @@
 {
     "name" : "cxappserver"
+    ,"deploy" : "/public"
+    ,"welcome" : "cxserverapp online. all systems green."
     ,"apps" : 
     [
         {
             "name" : "cxapp"
             ,"paths" :
             [
-       
                 {
-                    "public" : "/cxapp"
-                    ,"source" : "/source/app/cxapp"
+                    "route" : "/cxapp"
+                    ,"public" : "/cxapp"
+                    ,"source" : "/source/apps/cxapp"
+                    ,"html" : "/index.html"
                     ,"js" : 
                     [
                         {
@@ -24,8 +27,7 @@
                             ,"src" : "/styles/main.styl"
                         }
                     ]
-                }
-                    
+                }                    
                 
             ]
         }

@@ -1,45 +1,45 @@
-class BuildJS
+class buildjs
 
     browserify = require('browserify')
     path = require('path')
     fs = require('fs')
     stringify = require('stringify')
 
-    srcPath = ""
-    src = ""
-    dest = ""
+    
   
+    buildjs.debug = false
 
 
-    constructor: (srcPath, src, dest) ->
-        @srcPath = srcPath
-        @src = src
-        @dest = dest
 
 
-    build: (debug, callback, res) =>
+
+
+    buildjs.build = (src , dest, callback, res) =>
 
 
         try
-          
-
+            
             opts = {}
-            opts.debug = if debug isnt undefined then debug else false
+            opts.debug = buildjs.debug
             opts.cache = false
-            opts.watch = if debug isnt undefined then debug else false
+            opts.watch = buildjs.debug
             if !opts.debug then opts.filter = require('uglify-js')
 
             b = browserify(opts)
             b.use stringify('.html')
-            b.addEntry path.normalize __dirname+@srcPath+@src 
-            b.on 'syntaxError' , @_onSyntaxError  
-            b.on 'bundle' , @_onBundle  
+            b.addEntry path.normalize __dirname+"/../"+src 
+            b.on 'syntaxError' , buildjs.onsyntaxerror
+            b.on 'bundle' , buildjs.onbundle 
             
             data = b.bundle()
+
             
-            normDest = path.normalize __dirname+@dest
+            normDest = path.normalize __dirname+"/../"+dest
+
+           
             
             fs.writeFileSync(normDest, data ,'utf8')
+            
             callback(res)
             
             
@@ -50,11 +50,11 @@ class BuildJS
         catch e
             console.log 'error' , e
 
-    _onSyntaxError: (e) =>
-        console.log('Compile Error', e)
+    buildjs.onsyntaxerror = (e) =>
+        console.log('[Compile Error]:', e)
 
-    _onBundle: (e) =>         
-        console.log('Bundle ', arguments)
+    buildjs.onbundle = (e) =>         
+        #console.log('Bundle ', arguments)
 
 
 
@@ -64,4 +64,4 @@ class BuildJS
 
 
 
-module.exports = BuildJS
+module.exports = buildjs

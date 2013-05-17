@@ -1,14 +1,25 @@
-
+var coffee = require('coffee-script');
  
 
-var BuildJS = require('./buildjs');
-var BuildCSS = require('./buildcss');
+
+
+
+
+
+var cxappserver = require("./server/cxappserver");
+
+
+var app = new cxappserver();
+
+
+app.configure("../cxapp.json")
+app.create()
+
 
 /*
 var b = new BuildJS('/source/apps/cxapp/', 'main.coffee', '/public/cxapp/js/main.js');
 var c = new BuildCSS('/source/apps/cxapp/styles/', 'main.styl','/public/css/cxapp/main.css');
 
-*/
 var app = express();
 var debug = false;
 
@@ -53,7 +64,7 @@ app.configure('production', function()
 });
 
 
-/*
+
 app.get('/css/main.css' , function (req, res)
 {
   this.onBuild = function (res)
@@ -84,9 +95,9 @@ app.get('/js/main.js' , function (req,res)
 });
 
 app.get('/', function(req, res) {   res.sendfile(path.join(__dirname, "/public/index.html")); });
-*/
+
 app.use(express.static(path.join(__dirname, '/public')));
 http.createServer(app).listen(app.get('port'), function()
 {
   console.log("Server Running - [Meme] - Port: %d   Mode: %s", app.get('port'), app.settings.env);
-});
+});*/
