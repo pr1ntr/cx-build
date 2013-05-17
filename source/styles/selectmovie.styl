@@ -1,0 +1,108 @@
+#select-movies
+
+    width:965px
+    height:465px
+
+    .side
+        float:left
+        width:120px
+        height:465px
+        transition: opacity .5s
+        
+        opacity:0
+
+        &.active
+                opacity:1
+                cursor:pointer
+       
+
+        &#prev-page
+            clear:left
+            background: url("/images/misc/arrow_left.png") center center no-repeat
+
+             
+
+        &#next-page
+            clear:right
+            background: url("/images/misc/arrow_right.png") center center no-repeat
+
+           
+              
+
+    .center
+        width:725px
+        height:465px
+        float:left
+
+        .pages
+            width:725px
+            height:20px
+
+            ul
+                height:20px
+                margin:0 auto
+
+                li
+                    background: url("/images/misc/page_tick_container.png") center center no-repeat
+                    width:20px
+                    height:20px
+                    float:left
+
+                    > .page
+                        width:20px
+                        height:20px
+                        transition: opacity .5s
+                        background: url("/images/misc/page_tick.png") center center no-repeat
+                        opacity:0
+
+                        &.active
+                            opacity:1
+
+
+
+
+        .container
+            width:725px
+            height:445px
+            overflow:hidden
+            margin:0 auto
+
+            ul
+                height:465px
+                position:relative
+                left:0px
+
+                li.page
+                    width:725px
+                    height:465px
+                    float:left
+
+                    ul
+                        li.movie
+                            float:left
+                            width:240px
+                            height:220px
+                            cursor:pointer
+
+                            > .title
+                                color:#666666
+                                font-size:14px
+                                text-align:left
+                                width:230px
+                                margin:3px auto
+            
+
+                            > .thumb
+                                width:230px
+                                height:200px
+                                margin:0 auto
+                                transition: border .5s
+                                border:solid 2px #666666                                  
+
+                                img
+                                    width:226px   
+                                    height:196px
+
+                            &:hover , &.selected
+                                .thumb
+                                    border:solid 2px #e2652d

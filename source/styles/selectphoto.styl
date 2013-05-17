@@ -1,0 +1,59 @@
+#select-photos
+    width:935px
+    height:465px
+    margin:0 auto
+              
+    .container
+        width:935px
+        height:350px
+        overflow:hidden
+
+        ul
+            position:relative
+            height:350px
+            margin:0 auto
+
+            li
+                width:480px
+                height:306px                    
+                float:left
+                cursor:pointer
+                position:relative
+
+                > .image
+                    width:430px
+                    height:306px
+                    margin: 0 auto
+                    transition: border .5s
+                    border:solid 2px #666666   
+
+                &:hover , &.selected
+                    > .image
+                        border:solid 2px #e2652d
+
+
+    #control-bar
+        width:935px
+        height:12px
+        position:relative
+
+        .rail
+            position:absolute
+            width:935px
+            height:12px
+            background:#acacac
+
+        .handle
+            position:absolute
+            width:75px
+            height:12px
+            background:#e2652d
+            cursor:pointer
+            left:0
+
+
+           
+
+
+
+

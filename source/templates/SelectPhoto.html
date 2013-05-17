@@ -1,0 +1,26 @@
+<div class="title">
+    <h2><%= data.copy.title %></h2><div class="subtitle"><%= data.copy.subtitle %></div>
+</div>
+<div id="select-photos">
+    <div class="container">
+        <ul>
+        <% _.each(movies.photos, function(movie, i) { %>
+            <% console.log(movie) %>
+            <li data-image-id="<%= i %>">
+                <div class="image" >
+                    <img src="<%= movie.full %>" />
+                </div>
+                
+            </li>
+
+
+        <% }); %>
+        </ul>
+    </div>
+    
+    <div id="control-bar">
+        <div class="rail"></div>
+        <div class="handle"></div>
+    </div>
+
+</div>

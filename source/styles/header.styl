@@ -1,0 +1,70 @@
+
+#header
+    width:995px
+    height:100px
+
+    .title 
+        width:679px
+        height:65px
+        margin:0 auto
+        padding-top:25px
+
+#breadcrumbs
+    width:935px
+    height:30px
+    margin:0 auto
+    visibility:hidden
+    opacity:0
+    ul
+
+        > li.step
+            width:248px
+            height:30px
+            float:left
+            margin-left: -11px
+            font-size:14px
+            color:#fff
+            transition: background .5s
+
+            div.number
+                background: url("/images/header/crumb_bevel.png") center center no-repeat
+                width:30px
+                height:30px
+                float:left
+                text-align:center
+                line-height: 30px
+                margin-left:20px
+
+
+            div.label
+                float:left
+                line-height: 30px
+
+            &.gray
+                background: url("/images/header/crumb_gray.png")
+
+            &.orange
+                background: url("/images/header/crumb_orange.png")
+
+            &.first
+                width:236px
+                height:30px
+                margin-left:0
+
+                &.gray
+                    background: url("/images/header/crumb_first_gray.png")
+
+                &.orange
+                    background: url("/images/header/crumb_first_orange.png")
+
+            &.last
+                width:235px
+                height:30px
+                &.gray
+                    background: url("/images/header/crumb_last_gray.png")
+
+                &.orange
+                    background: url("/images/header/crumb_last_orange.png")
+
+
+    

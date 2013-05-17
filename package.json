@@ -1,0 +1,21 @@
+{
+  "name": "meme-generator",
+  "version": "0.5.0",
+  "dependencies": {
+    "express": "3.x.x"
+    ,"backbone-browserify" : "0.9.x"
+    ,"browserify" : "1.15.x"
+    ,"coffee-script" : "1.3.x"
+    ,"jquery-browserify" : "1.7.2"
+    ,"jquery-mousewheel" : "3.1.3"
+    ,"stringify" : "1.0.x"
+    ,"stylus" : "0.29.x"
+    ,"uglify-js" : "1.3.x"
+    ,"underscore" : "1.4.x"
+    ,"nib" : "0.9.x"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  }
+}
