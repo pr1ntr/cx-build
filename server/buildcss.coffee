@@ -14,10 +14,14 @@ class buildcss
         try
 
             file = fs.readFileSync(path.normalize(__dirname+"/../"+src), 'utf8')    
-            basePath = src.match(/\/\w+\//)
-            console.log basePath[0]
+            bp = src.split("/")
+            bp.pop()
+            basePath = ""
+            for str in bp
+                basePath += str+"/"
+                
             stylus(file)
-                .set("paths", [path.normalize(__dirname+"/../"+basePath[0])])
+                .set("paths", [path.normalize(__dirname+"/../"+basePath)])
                 .use(nib())
                 .render (err, out) =>
                     css = out
