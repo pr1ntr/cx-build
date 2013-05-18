@@ -1,6 +1,12 @@
 
 
-class Sockets
+
+io = require 'socket.io'
+
+class sockets
 
 
-module.exports = Sockets
+
+
+
+module.exports = sockets

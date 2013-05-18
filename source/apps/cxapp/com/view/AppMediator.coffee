@@ -1,7 +1,7 @@
 
 AppModel = require '../model/AppModel'
 PreloaderZed = require '../model/utils/PreloaderZed'
-
+SocketConnection = require '../sockets/SocketConnection'
 
 
 class AppMediator
@@ -30,7 +30,10 @@ class AppMediator
       
 
     initialize: () =>
+        @socket = new SocketConnection()
 
+        navigator.geolocation.getCurrentPosition (data) =>
+            console.log data
 
        
 

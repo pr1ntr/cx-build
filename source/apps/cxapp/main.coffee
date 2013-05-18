@@ -3,6 +3,8 @@ window.$ = window.jQuery = require('jquery-browserify')
 require('jquery-mousewheel')($)
 window._ = require('underscore')
 window.Backbone = require('backbone-browserify')
+window.io = require './include/socket/socket.io.js'
+
 
 
 

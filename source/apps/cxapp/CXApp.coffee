@@ -2,6 +2,7 @@
 AppModel = require './com/model/AppModel'
 AppMediator = require './com/view/AppMediator'
 
+
 class CXApp
 
     constructor: (dataUrl)->
@@ -17,8 +18,12 @@ class CXApp
 
 
     initApp: =>
+
+
         @app = new AppMediator()
         @app.initialize()
+
+
 
 
 
