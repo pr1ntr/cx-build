@@ -1,6 +1,7 @@
 
 PreloaderZed = require './utils/PreloaderZed'
 ModelBase = require './abstract/ModelBase'
+SocketConnection = require '../sockets/SocketConnection'
 
 
 class AppModel extends ModelBase
@@ -36,17 +37,36 @@ class AppModel extends ModelBase
         @url = opts.url
         super()
         @on 'change' , @onAppModelData
+     
 
     onAppModelData: (target) =>
         @off 'change' , @onAppModelReady
         
+
         @createLoadManifest()
         @scaffoldData(@attributes)
         @searchAssets(@get("app").attributes)
+        @socket = new SocketConnection()
+        @socket.on 'connect' , @onUserConnect
+        @socket.on 'globalPing' , @onGlobalPing
+        @socket.start()
         @trigger 'dataReady' , @
 
 
-    processMovies: =>
+    onUpdateGeo: (data) =>
+        @set("geo" , data)
+        @socket.broadcast(data)
+
+    onGlobalPing: (data) =>
+        console.log data ,"global data"
+        @set("globalUsers" , data)
+        @trigger "globalPing" , data
+
+    onUserConnect: (data) =>
+        @set("user" , data)
+        @trigger("connectUser")
+
+
 
     searchAssets: (object) =>
         

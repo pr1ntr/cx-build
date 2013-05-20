@@ -20,6 +20,10 @@ class cxappserver
 
     server = {}
     app = new express()
+    globalPing = ""
+    timer = false
+    socket = null
+
 
     cxappserver.allowCrossDomain = (req , res , next) =>
         res.header('Access-Control-Allow-Origin', "*")
@@ -83,15 +87,6 @@ class cxappserver
         
 
 
-
-        
-        
-
-
-
-
-
-
     create: () =>
 
         msg = data.welcome
@@ -101,6 +96,12 @@ class cxappserver
         server = http.createServer(app)
         @routes()
         @sockets()
+        globalPing = setInterval (=>
+            @onGlobalPing(socket)
+            )  , 5000
+        @onGlobalPing(socket)
+
+
         server.listen(app.get('port') , ( => 
             console.log msg , "[Port]:", app.get('port') , "[Env]:", app.settings.env
             ) )
@@ -111,23 +112,37 @@ class cxappserver
 
     sockets: =>
 
-  
-        io = io.listen server
-
-
-
         
+        
+        io = io.listen server
         user = {}
 
-        io.sockets.on 'connection' , (socket) => 
-            
+        io.sockets.on 'connection' , (s) => 
+
+            socket = s
             socket.on 'connect' , (data) =>
                 user = model.getUser(data)
                 console.log 'user:' , user
                 socket.set user.id , user , =>
                     socket.emit 'success' ,  user
 
+            socket.on 'geo' , (data) =>
+                model.users[data.id] = data
+                user = data
+                console.log "USER" , user
 
+
+        
+
+
+
+
+
+           
+
+    onGlobalPing: (socket)=>
+        if socket isnt undefined and socket isnt null
+            socket.emit 'global_ping' , model.users
 
 
 
@@ -136,9 +151,6 @@ class cxappserver
             
         
     routes: =>     
-        
- 
-
         for a in @apps
 
             for p in a.paths

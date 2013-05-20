@@ -7,13 +7,18 @@ class CXApp
 
     constructor: (dataUrl)->
         #the constructor
+
+     
         if dataUrl isnt undefined
             @model = AppModel.getInstance
                 url: dataUrl
             @model.on "ready" , @initApp
             @model.fetch()
         else
-            @initApp()
+            @model = AppModel.getInstance
+                url: "/cxapp/data/data.json"
+            @model.on "ready" , @initApp
+            @model.fetch()
     
 
 

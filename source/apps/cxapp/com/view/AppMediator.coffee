@@ -1,7 +1,8 @@
 
 AppModel = require '../model/AppModel'
 PreloaderZed = require '../model/utils/PreloaderZed'
-SocketConnection = require '../sockets/SocketConnection'
+
+MapView = require './MapView'
 
 
 class AppMediator
@@ -12,6 +13,8 @@ class AppMediator
 
     views = []
     currentView = null
+    geo = {}
+    broadcaster = {}
 
 
 
@@ -30,13 +33,32 @@ class AppMediator
       
 
     initialize: () =>
-        @socket = new SocketConnection()
-
-        navigator.geolocation.getCurrentPosition (data) =>
-            console.log data
-
        
 
+        
+        
+
+
+        @map = new MapView
+            el:"#map-canvas"
+            model:@model
+
+        @broadcastLocation()
+
+    
+
+    broadcastLocation: =>
+        broadcaster = setInterval  @broadcastTick , 5000
+        @broadcastTick()
+
+    broadcastTick: =>
+
+        navigator.geolocation.getCurrentPosition (data) =>
+            @model.onUpdateGeo JSON.stringify(data.coords)
+          
+
+    initViews: =>
+        
 
 
     onStepChange: (view) =>
