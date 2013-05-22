@@ -1,8 +1,8 @@
 
-AppModel = require '../model/AppModel'
-PreloaderZed = require '../model/utils/PreloaderZed'
+AppModel = require '../model/AppModel.coffee'
+PreloaderZed = require '../model/utils/PreloaderZed.coffee'
 
-MapView = require './MapView'
+MapView = require './MapView.coffee'
 
 
 class AppMediator

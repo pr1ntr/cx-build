@@ -1,7 +1,7 @@
 
-PreloaderZed = require './utils/PreloaderZed'
-ModelBase = require './abstract/ModelBase'
-SocketConnection = require '../sockets/SocketConnection'
+PreloaderZed = require './utils/PreloaderZed.coffee'
+ModelBase = require './abstract/ModelBase.coffee'
+SocketConnection = require '../sockets/SocketConnection.coffee'
 
 
 class AppModel extends ModelBase

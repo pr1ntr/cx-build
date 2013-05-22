@@ -2,7 +2,9 @@
 path = require('path')
 stylus = require('stylus')
 nib = require('nib')
-browserify_express = require('browserify-express')
+stringify = require('stringify')
+browserify = require('browserify')
+
 
 class appmiddleware
 
@@ -21,14 +23,30 @@ class appmiddleware
 
 
     appmiddleware.js = (src,watch,dest,debug) =>
-        bundle = browserify_express
-            entry:src
-            watch:watch
-            mount:dest
-            verbose: debug
-            minify: !debug
-            bundle_opts: {debug:debug}
-            watch_upts: {recursive: false}
+        
+        opts = {}
+        opts.debug = debug
+        opts.cache = !debug
+        opts.watch = debug
+        if debug then opts.filter = require('uglify-js')
+        b = browserify(opts)
+        b.use(stringify('.html'))
+        b.addEntry(path.normalize(src))
+
+        data = b.bundle()
+
+
+
+        return (req , res,next) ->
+            if req.url.split('?')[0] is opts.mount
+                res.statusCode = 200
+                res.setHeader('last-modified', cache_time.toString())
+                res.setHeader('content-type', 'text/javascript')
+                res.end(data)
+            
+            else 
+                next()
+            
 
 
 

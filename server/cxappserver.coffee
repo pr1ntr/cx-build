@@ -147,7 +147,7 @@ class cxappserver
                     app.use appmiddleware.css __dirname+"/../"+css.src , __dirname+"/../"+data.deploy , debug
 
                 for js in p.js   
-                    app.use appmiddleware.js __dirname+"/../"+js.path+js.src ,  __dirname+"/../"+js.path, __dirname+"/../"+data.deploy+p.public+js.script, debug
+                    app.use appmiddleware.js __dirname+"/../"+js.path+js.src ,  __dirname+"/../"+js.path,  p.public+js.script, debug
   
 
         app.use express.static(path.join(path.normalize(__dirname+"/../"), data.deploy)) 

@@ -1,6 +1,6 @@
 
 
-ViewBase = require './abstract/ViewBase'
+ViewBase = require './abstract/ViewBase.coffee'
 
 class MapView extends ViewBase
     

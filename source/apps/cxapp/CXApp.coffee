@@ -1,6 +1,6 @@
 
-AppModel = require './com/model/AppModel'
-AppMediator = require './com/view/AppMediator'
+AppModel = require './com/model/AppModel.coffee'
+AppMediator = require './com/view/AppMediator.coffee'
 
 
 class CXApp
@@ -11,7 +11,7 @@ class CXApp
      
         if dataUrl isnt undefined
             @model = AppModel.getInstance
-                url: dataUrl
+                url: dataUrl 
             @model.on "ready" , @initApp
             @model.fetch()
         else
@@ -24,12 +24,13 @@ class CXApp
 
     initApp: =>
 
-
+        console.log "fuck" 
         @app = new AppMediator()
-        @app.initialize()
+        @app.initialize() 
 
 
 
 
+  
+module.exports = CXApp  
  
-module.exports = CXApp 

@@ -36,7 +36,7 @@ urlParam = (name) ->
     regex = new RegExp(regexS)
     results = regex.exec(window.location.href)
     unless results?
-    	undefined
+    	undefined 
     else
    		results[1]
  
@@ -50,9 +50,10 @@ if window.console is undefined or window.console is null
 
 
 
-CXApp = require './CXApp'
+CXApp = require './CXApp.coffee' 
 
 $(document).ready ->
+    console.log "fuck"
     cx = new CXApp(urlParam('data'))
     
 

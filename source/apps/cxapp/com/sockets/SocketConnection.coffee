@@ -1,5 +1,5 @@
 
-CookieManager = require '../model/utils/CookieManager'
+CookieManager = require '../model/utils/CookieManager.coffee'
 
 
 

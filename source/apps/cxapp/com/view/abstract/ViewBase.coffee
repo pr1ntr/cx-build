@@ -1,4 +1,4 @@
-AppModel = require '../model/AppModel'
+AppModel = require '../model/AppModel.coffee'
 
 
 class ViewBase extends Backbone.View
