@@ -9,22 +9,21 @@
             ,"paths" :
             [
                 {
-                    "route" : "/cxapp"
+                    "route" : "/cxapp/*"
                     ,"public" : "/cxapp"
-                    ,"source" : "/source/apps/cxapp"
                     ,"html" : "/index.html"
                     ,"js" : 
                     [
                         {
                             "script" : "/js/main.js"
-                            ,"src" : "/main.coffee"
+                            ,"path":"/source/apps/cxapp/"
+                            ,"src" : "main.coffee"
                         }
                     ]
                     ,"css" : 
                     [
                         {
-                            "script" : "/styles/"
-                            ,"src" : "/styles/"
+                            "src" : "/source/apps/"
                         }
                     ]
                 }                    

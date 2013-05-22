@@ -1,11 +1,8 @@
 express = require('express')
 http = require('http')
 path = require('path')
-coffee = require('coffee-script')
-uglify = require('uglify-js')
-buildjs = require('./buildjs')
-buildcss = require('./buildcss')
 approuter = require('./approuter')
+appmiddleware = require('./appmiddleware')
 sockets = require('./sockets')
 model = require('./models/model')
 uuid = require 'node-uuid'
@@ -50,6 +47,7 @@ class cxappserver
 
             if app.settings.env is 'development'
                 debug = true
+
                 
             else if app.settings.env  is 'staging'
                 debug = false
@@ -58,17 +56,13 @@ class cxappserver
             else if app.settings.env  is 'production'
                 debug = false
             
-
             
-            
-            if next is undefined
-                
+            if next is undefined                
                 app.set 'port' , process.env.PORT or 1923
                 app.use express.favicon()
                 app.use express.logger('dev')
                 app.use express.bodyParser()
-                app.use express.methodOverride()
-                
+                app.use express.methodOverride()                
                 app.use cxappserver.allowCrossDomain 
 
 
@@ -78,6 +72,7 @@ class cxappserver
                         dumpExceptions: true
                         showStack: true
 
+
             if env isnt undefined and next isnt undefined
                 app.configure(env, next)
             else if next isnt undefined
@@ -86,8 +81,7 @@ class cxappserver
 
 
 
-            buildjs.debug = debug
-            buildcss.debug = debug
+   
             
         catch e
             console.log "Error" , e
@@ -103,7 +97,7 @@ class cxappserver
         server = http.createServer(app)
         
         @middleware()
-        #@routes()
+        @routes()
 
         @sockets()
         globalPing = setInterval (=>
@@ -149,48 +143,25 @@ class cxappserver
 
             for p in a.paths
 
-                for css in p.css
-                    console.log path.normalize __dirname+"/../"+p.source+css.src
-                    console.log path.normalize __dirname+"/../"+data.deploy+p.public
-                    app.configure () -> 
-                        app.use stylus.middleware
-                            src: path.normalize __dirname+"/../"+p.source+css.src
-                            dest: path.normalize __dirname+"/../"+data.deploy+p.public
-                            compile : (str, path) ->
+                for css in p.css                    
+                    app.use appmiddleware.css __dirname+"/../"+css.src , __dirname+"/../"+data.deploy , debug
 
-                                console.log str
-                                stylus(str)
-                                .set 'filename' , path
-                                .set 'compress' , false
-                                .use nib()
+                for js in p.js   
+                    app.use appmiddleware.js __dirname+"/../"+js.path+js.src ,  __dirname+"/../"+js.path, __dirname+"/../"+data.deploy+p.public+js.script, debug
+  
 
         app.use express.static(path.join(path.normalize(__dirname+"/../"), data.deploy)) 
                
-        app.use app.router
-
+        
         
     routes: =>     
-
-
+        app.use app.router
         for a in @apps
 
             for p in a.paths
-        
-                app.get p.route, (req , res) =>
+
+                app.get p.route , (req , res) =>
                     approuter.index req , res , data.deploy+p.public+p.html
-
-                for js in p.js
-              
-                    app.get p.route+js.script , (req, res) =>
-                        approuter.js req , res, data.deploy+p.public+js.script, p.source+js.src
-
-
-
-                for css in p.css
-                    app.get p.route+css.script , (req, res) =>
-                        approuter.css req , res, data.deploy+p.public+css.script, p.source+css.src
-
-        
 
             
 
