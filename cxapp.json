@@ -23,8 +23,8 @@
                     ,"css" : 
                     [
                         {
-                            "script" : "/css/main.css"
-                            ,"src" : "/styles/main.styl"
+                            "script" : "/styles/"
+                            ,"src" : "/styles/"
                         }
                     ]
                 }                    

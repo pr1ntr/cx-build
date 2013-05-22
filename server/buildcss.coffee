@@ -19,7 +19,8 @@ class buildcss
             basePath = ""
             for str in bp
                 basePath += str+"/"
-                
+            
+            console.log basePath
             stylus(file)
                 .set("paths", [path.normalize(__dirname+"/../"+basePath)])
                 .use(nib())
