@@ -1,6 +1,6 @@
 {
   "name": "cx-build",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Turn-key app build server. Uses json application descriptor file to set up routes",
   "main": "server.js",
   "dependencies": {
