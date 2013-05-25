@@ -1,7 +1,7 @@
 fs = require 'fs'
 path = require 'path'
 sys = require 'sys'
-{exec} = require 'child_process'
+{spawn, exec} = require 'child_process'
 ncp = require('ncp').ncp
 ncp.limit = 8
 defaults =
@@ -18,12 +18,14 @@ assets =
     main: "main.coffee"
     style:"main.styl"
     index:"index.html"
+    modernizr: "modernizr-2.6.2-respond-1.1.0.min.js"
     greensock: "greensock"
     createjs: "create"
 
 template =
     source: [
         "/source"
+        ,"/source/apps/"
         ,"/source/apps/{name}/"
         ,"/source/apps/{name}/com"
         ,"/source/apps/{name}/styles"
@@ -36,6 +38,7 @@ template =
         ,"/public/{pub}data"
         ,"/public/{pub}images"
         ,"/public/{pub}js"
+        ,"/public/{pub}js/vendor"
         ,"/public/{pub}styles"
     ]
 
@@ -149,7 +152,7 @@ task 'scaffold' , 'Scaffold a new blank project' , (options) ->
     fs.readFile src[1] , (err,data) ->
         if err
             throw err
-        str = data.toString().split("{dir}").join(appname)
+        str = data.toString().split("{dir}").join(pub)
 
         fs.writeFileSync(dest[1], str)
 
@@ -175,6 +178,12 @@ task 'scaffold' , 'Scaffold a new blank project' , (options) ->
         if err
             console.log err
 
+    src[5] = path.normalize __dirname+dir+assets.modernizr
+    dest[5] = path.normalize __dirname+root+ "/public/#{pub}js/vendor/#{assets.modernizr}" 
+    ncp  src[5], dest[5] , (err) ->
+        if err
+            console.log err
+
 
 
 
@@ -185,8 +194,18 @@ task 'run' , 'start server in whatever mode' , (options) ->
     if options.data is undefined
         throw new Error "set --data [-D] switch"
 
-    child = exec "NODE_ENV=#{options.env} APP_DATA=#{options.data} node server.js"
-    child.stdout.on 'data' , (data) -> sys.print data
+    terminal = spawn 'bash'
+
+   
+    terminal.stdout.on 'data' , (data) -> sys.print data
+    terminal.stdout.on 'exit' , (data) -> console.log data , "server exit."
+
+
+    terminal.stdin.write "NODE_ENV=#{options.env} APP_DATA=#{options.data} node server.js"
+    terminal.stdin.end()
+
+
+
 
 
 
