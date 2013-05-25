@@ -136,8 +136,8 @@ class cxappserver
         if socket isnt undefined and socket isnt null
             socket.emit 'global_ping' , model.users
 
-    middleware: =>   
-
+    
+    middleware: =>  
 
         for a in @apps
 
@@ -146,29 +146,29 @@ class cxappserver
                 for css in p.css                    
                     app.use appmiddleware.css __dirname+"/../"+css.src , __dirname+"/../"+data.deploy , debug
 
-                for js in p.js   
-                    app.use appmiddleware.js __dirname+"/../"+js.path+js.src ,  __dirname+"/../"+js.path,  p.public+js.script, debug
-  
-
-        app.use express.static(path.join(path.normalize(__dirname+"/../"), data.deploy)) 
-               
-        
+                for js in p.js
+                    
+                    app.use appmiddleware.js   path.normalize(__dirname+"/../"+js.src),  p.public+js.path , path.normalize(__dirname+"/../"+data.deploy+p.public+js.path) , debug
+            
         
     routes: =>     
+
+        
+        app.use express.static(path.join(path.normalize(__dirname+"/../"), data.deploy)) 
         app.use app.router
-        for a in @apps
+        
+        for a in @apps            
 
             for p in a.paths
+              
 
-                app.get p.route , (req , res) =>
+                route = if p.route isnt "/" then p.route else ""
+
+               
+
+
+                app.get "#{p.route}", (req , res) =>
                     approuter.index req , res , data.deploy+p.public+p.html
-
-            
-
-
-
-
-
 
         
 

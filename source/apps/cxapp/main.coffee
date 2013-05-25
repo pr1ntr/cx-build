@@ -1,25 +1,19 @@
 
-window.$ = window.jQuery = require('jquery-browserify')
-require('jquery-mousewheel')($)
 window._ = require('underscore')
-window.Backbone = require('backbone-browserify')
+window.Backbone = require('backbone')
 window.io = require './include/socket/socket.io.js'
 
 
 
 
 
-Backbone.setDomLibrary($)
+Backbone.$ = $
 
 
 
 window.createjs = window.createjs or {}
 
 
-
-require './include/greensock/TweenMax.min'
-require './include/greensock/TimelineMax.min'
-require './include/greensock/easing/EasePack.min.js'
 
 
 

@@ -19,8 +19,9 @@ class MapView extends ViewBase
 
     updateGeolocation: () =>
 
+
         navigator.geolocation.getCurrentPosition (data) =>
-     
+            console.log "updateGeolocation" , data
             geo = data
             mapOptions =
                 center: new google.maps.LatLng(geo.latitude , geo.longitude)

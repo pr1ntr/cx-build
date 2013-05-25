@@ -15,9 +15,9 @@
                     ,"js" : 
                     [
                         {
-                            "script" : "/js/main.js"
-                            ,"path":"/source/apps/cxapp/"
-                            ,"src" : "main.coffee"
+                            "path" : "/js/main.js"
+                            ,"src":"/source/apps/cxapp/main.coffee"
+                          
                         }
                     ]
                     ,"css" : 

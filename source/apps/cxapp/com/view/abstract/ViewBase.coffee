@@ -1,4 +1,4 @@
-AppModel = require '../model/AppModel.coffee'
+
 
 
 class ViewBase extends Backbone.View
@@ -7,7 +7,6 @@ class ViewBase extends Backbone.View
     initialize: (temp) ->
 
         template = temp
-        @modelMainInstance = AppModel.getInstance()
         @assets = []
         @moviews = []
         if @options.assets isnt undefined
