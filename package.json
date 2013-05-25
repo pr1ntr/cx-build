@@ -1,6 +1,6 @@
 {
   "name": "cx-build",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Turn-key app build server. Uses json application descriptor file to set up routes",
   "main": "server.js",
   "dependencies": {
@@ -14,7 +14,8 @@
     "uglify-js": "~1.3.3",
     "node-codein": "~1.0.3",
     "underscore": "~1.4.2",
-    "backbone": "~1.0.0"
+    "backbone": "~1.0.0",
+    "ncp": "~0.4.2"
   },
   "devDependencies": {
     "coffee-script": "~1.3.3"

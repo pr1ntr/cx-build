@@ -1,0 +1,28 @@
+{
+    "name": "cxappserver",
+    "deploy": "/public",
+    "welcome": "cxserverapp online. all systems green.",
+    "apps": [
+        {
+            "name": "cx2",
+            "paths": [
+                {
+                    "route": "/*",
+                    "public": "/",
+                    "html": "/index.html",
+                    "js": [
+                        {
+                            "path": "js/main.js",
+                            "src": "/source/apps/cx2/main.coffee"
+                        }
+                    ],
+                    "css": [
+                        {
+                            "src": "/source/apps/cx2"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
