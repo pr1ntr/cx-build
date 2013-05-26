@@ -46,12 +46,15 @@ template =
 
 option "-d" , "--destination [destination]" , 'destination directory. default: none'
 option "-n" , "--name [name]" , 'name for app template. default: cx'
-option "-m" , "--multi [multi]" , 'if application should run from a folder named by --name. default: false'
-option "-j" , "--javascript [javascript]" , 'will create project with a javascript bootstrap. default: false'
+option "-m" , "--multi"  , 'if application should run from a folder named by --name. default: false'
+option "-j" , "--javascript" , 'will create project with a javascript bootstrap. default: false'
 
 option "-e" , "--env [environment]" , 'sets server environment mode'
 option "-D" , "--data [data]" , 'sets path to app descriptor json'
 
+
+task 'test' , '' , (options) ->
+    console.log arguments
 
 
 task 'help' , 'show help' , (options) ->
@@ -62,7 +65,7 @@ task 'help' , 'show help' , (options) ->
     console.log "-n" , "--name [name]" , 'name for app template. default: cx'
     console.log "-m" , "--multi [multi]" , 'if application should run from a folder named by --name. default: false'
     console.log "-j" , "--javascript [javascript]" , 'will create project with a javascript bootstrap. default: false'
-    console.log "\nexample:   cake -n my-new-app -m false -j true\n" 
+    console.log "\nexample:   cake -n my-new-app -m -j \n" 
 
 
     console.log "cmd:  run\narguments:"
