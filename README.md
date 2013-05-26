@@ -2,9 +2,12 @@ cx-build
 ========
 
 Allows creation of javascript applications with a json descriptor. 
+----------
+---
 
 To create new project use a couple of handy cake commands.
 
+---
 cake help  
 displays help
 
@@ -29,3 +32,6 @@ runs the server with in development or production mode. pass in the descriptor j
   -D --data [data] sets path to app descriptor json.
 
     cake -e development -D ../<name of app>.json run
+
+--
+--
