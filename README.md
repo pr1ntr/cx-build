@@ -8,7 +8,7 @@ To create new project use a couple of handy cake commands.
 cake help  
 displays help
 
-    example: cake help
+    cake help
 
 
 cake scaffold      
@@ -28,4 +28,4 @@ runs the server with in development or production mode. pass in the descriptor j
   -e --env [environment] sets server environment mode .
   -D --data [data] sets path to app descriptor json.
 
-    example:   cake -e development -D ../<name of app>.json run
+    cake -e development -D ../<name of app>.json run
