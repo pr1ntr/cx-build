@@ -1,0 +1,56 @@
+{
+    "name": "cxappserver",
+    "deploy": "/public",
+    "welcome": "cxserverapp online. all systems green.",
+    
+    "apps": [
+        {
+            "name": "jadedemo",
+            "db" : {},
+            "views" : "/source/apps/jadedemo/templates/",
+            "paths": [
+               
+                {
+                    "route": "/home",
+                    "public": "/",
+                    "view" : "home",
+                    "data" : {
+                        "json" : "/source/apps/jadedemo/data/home.json",
+                        "webservice" : "http://"
+                    },
+                    "js": [
+                        {
+                            "path": "js/main.js",
+                            "src": "/source/apps/jadedemo/main.coffee"
+                        }
+                    ],
+                    "css": [
+                        {
+                            "src": "/source/apps/jadedemo"
+                        }
+                    ]
+                },
+                 {
+                    "route": "/",
+                    "public": "/",
+                    "view" : "index",
+                    "data" : {
+                        "json" : "/source/apps/jadedemo/data/index.json",
+                        "webservice" : "http://"
+                    },
+                    "js": [
+                        {
+                            "path": "js/main.js",
+                            "src": "/source/apps/jadedemo/main.coffee"
+                        }
+                    ],
+                    "css": [
+                        {
+                            "src": "/source/apps/jadedemo"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

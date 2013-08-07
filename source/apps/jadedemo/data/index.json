@@ -1,0 +1,9 @@
+{ 
+	"title" : "welcom  to a server side rendered page. its jawsome"
+	,"body" : "Nulla eleifend erat eu ipsum laoreet, nec pharetra tellus porttitor. Vivamus dapibus, sem in imperdiet vestibulum, purus libero varius elit, id scelerisque ipsum dolor vel metus. Fusce ante ipsum, fringilla in tempor eu, commodo eget nunc. Phasellus dignissim pellentesque ultrices. Suspendisse ac aliquam nisi. Suspendisse sollicitudin nunc turpis, sed blandit elit rutrum ac. Vivamus justo eros, gravida sed eleifend vitae, imperdiet nec eros. Phasellus euismod lacus vitae nisl vehicula, et laoreet velit commodo. Fusce placerat bibendum nisi eu interdum. Aenean id augue a nisi facilisis laoreet nec vel lorem."
+	,"photos" : [
+		"url"
+		,"url"
+	]	
+
+}

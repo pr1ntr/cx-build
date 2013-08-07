@@ -8,6 +8,7 @@ model = require('./models/model')
 uuid = require 'node-uuid'
 nib = require('nib')
 stylus = require('stylus')
+jade = require('jade')
 
 
 
@@ -22,6 +23,7 @@ class cxappserver
     globalPing = ""
     timer = false
     socket = null
+    root = __dirname+"/../"
 
 
     cxappserver.allowCrossDomain = (req , res , next) =>
@@ -77,7 +79,24 @@ class cxappserver
             else if next isnt undefined
                 next()
 
+            
+        
+           
 
+            app.set "view engine" , "jade"
+            @enableMultipleViewFolders()
+            
+
+            views = []
+            for a in @apps
+                console.log a
+                if a.views isnt undefined
+                    views.push path.normalize root+a.views
+
+            app.set "views" , views
+
+
+         
 
 
    
@@ -97,6 +116,7 @@ class cxappserver
         
         @middleware()
         @routes()
+
 
       
 
@@ -120,36 +140,57 @@ class cxappserver
             for p in a.paths
 
                 for css in p.css                    
-                    app.use appmiddleware.css __dirname+"/../"+css.src , __dirname+"/../"+data.deploy , debug
+                    app.use appmiddleware.css root+css.src , root+data.deploy , debug
 
                 for js in p.js
                     
-                    app.use appmiddleware.js   path.normalize(__dirname+"/../"+js.src),  p.public+js.path , path.normalize(__dirname+"/../"+data.deploy+p.public+js.path) , debug
+                    app.use appmiddleware.js   path.normalize(root+js.src),  p.public+js.path , path.normalize(root+data.deploy+p.public+js.path) , debug
             
         
     routes: =>     
 
         
-        app.use express.static(path.join(path.normalize(__dirname+"/../"), data.deploy)) 
+        app.use express.static(path.join(path.normalize(root), data.deploy)) 
         app.use app.router
         
         for a in @apps            
 
             for p in a.paths
-              
+                do (p) =>
+                    if p.html isnt undefined
+                        app.get "#{p.route}", (req , res) =>
+                            approuter.index req , res , data.deploy+p.public+p.html
 
-                route = if p.route isnt "/" then p.route else ""
+                    if p.view isnt undefined                        
+                        if p.data isnt undefined
+                            p.data.result = {}
+                            if p.data.json isnt undefined
+                                p.data.result = require path.normalize root + p.data.json
 
-               
-
-
-                app.get "#{p.route}", (req , res) =>
-                    approuter.index req , res , data.deploy+p.public+p.html
-
-        
-
+                        app.get "#{p.route}" , (req , res) =>      
+                            res.render p.view , p.data.result
 
 
+
+            
+    enableMultipleViewFolders: ->
+  
+        # Monkey-patch express to accept multiple paths for looking up views.
+        # this path may change depending on your setup.
+        View = require("../node_modules/express/lib/view")
+        lookup_proxy = View::lookup
+        View::lookup = (viewName) ->
+            context = undefined
+            match = undefined
+            if @root instanceof Array
+                i = 0
+                while i < @root.length
+                    context = root: @root[i]
+                    match = lookup_proxy.call(context, viewName)
+                    return match  if match
+                    i++
+                return null
+            lookup_proxy.call this, viewName
 
 
 
