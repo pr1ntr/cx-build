@@ -5,7 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "browserify": "~2.14.2",
-    "bundlr": "0.0.2",
+    "bundlr": "0.0.3",
     "nib": "~0.9.0",
     "express": "~3.3.4",
     "node-uuid": "~1.4.0",

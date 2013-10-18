@@ -19,16 +19,13 @@ module.exports = bundlr = (opts) ->
     debug = opts.debug
     write = opts.write or true
     caching = opts.cache or false
+    watch = opts.watch or false
+    
     watchCallback = opts.watchCallback or (err, data) ->
         if err
             console.log err
         else 
             console.log "bundle success."
-
-    console.log "[Source]:" , src
-    console.log "[Route]:" , route
-    console.log "[Dest]:" , dest
-
     
     b = browserify() 
     
@@ -86,8 +83,8 @@ module.exports = bundlr = (opts) ->
                 b.allFiles = []
                 b.bundle {debug:debug} , (err, src) ->
                     compress = !debug
-                    watch = debug
-                    if watch
+                    isWatch = watch
+                    if isWatch
                         watchFiles(b, req_path)
 
                     

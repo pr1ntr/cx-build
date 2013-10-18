@@ -24,6 +24,7 @@ class cxappserver
     timer = false
     socket = null
     root = __dirname+"/../"
+    layout = null
 
 
     cxappserver.allowCrossDomain = (req , res , next) =>
@@ -89,7 +90,6 @@ class cxappserver
 
             views = []
             for a in @apps
-                console.log a
                 if a.views isnt undefined
                     views.push path.normalize root+a.views
 
@@ -167,7 +167,8 @@ class cxappserver
                             if p.data.json isnt undefined
                                 p.data.result = require path.normalize root + p.data.json
 
-                        app.get "#{p.route}" , (req , res) =>      
+                        app.get "#{p.route}" , (req , res) =>   
+                            console.log p.view   
                             res.render p.view , p.data.result
 
 

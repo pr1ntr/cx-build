@@ -8,12 +8,13 @@
             "name": "jadedemo",
             "db" : {},
             "views" : "/source/apps/jadedemo/templates/",
+            "layout" : "layout/index",
             "paths": [
                
                 {
-                    "route": "/home",
+                    "route": "/news",
                     "public": "/",
-                    "view" : "home",
+                    "view" : "news",
                     "data" : {
                         "json" : "/source/apps/jadedemo/data/home.json",
                         "webservice" : "http://"
@@ -33,7 +34,7 @@
                  {
                     "route": "/",
                     "public": "/",
-                    "view" : "index",
+                    "view" : "home",
                     "data" : {
                         "json" : "/source/apps/jadedemo/data/index.json",
                         "webservice" : "http://"
