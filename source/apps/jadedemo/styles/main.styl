@@ -2,13 +2,16 @@
 @import "nib/index"
 global-reset()
 
+li
+  list-style:none
+
 
 *
   -webkit-box-sizing: border-box
   -moz-box-sizing: border-box
   -ms-box-sizing: border-box
   box-sizing: border-box
-  user-select: none
+
 
 
 
@@ -16,9 +19,99 @@ global-reset()
 body, html
     margin:0
     position:relative
-    font-family:"Arial" , "Helvetica" , sans-serif
+    font-family:"Open Sans" , "Arial" , "Helvetica" , sans-serif
+    font-weight:400
     width:100%
     height:100%
+    background:#292929
+
+
+fontColor = #c4c4c4
+fontColorDark = #1e1e1e
+
+
+header
+  width:100%
+  height:30px
+  background:#490a3d
+
+  
+p
+  margin:20px
+  color:white
+  line-height:18px
+  font-size:14px
+
+h1 , h2
+  margin:20px
+  color:#cfe917
+  font-size:22px
+  color:fontColor
+
+h2
+  font-size:18px
+
+li.item
+  h2
+    padding-left:10px
+  p
+    padding-left:20px
+
+
+li.nav-item , li.footer-item
+
+
+  height:30px
+  width: auto
+  display:inline-block    
+  text-align:center  
+  padding:0 40px
+  font-weight:300
+  cursor:pointer
+
+ 
+
+  &.orange
+    background:#e97f02
+
+  &.red
+    background:#bd1550
+
+  &.yellow
+    background:#f8ca00
+    a
+      color:fontColorDark
+  
+  &.green
+    background:#8a9b0f
+
+
+  a
+    text-decoration:none
+    color:fontColor
+    font-size:18px
+    text-transform:uppercase
+    line-height:30px
+
+
+li.footer-item
+    height:22px
+    
+
+    a
+      line-height:22px
+      font-size:12px
+
+
+footer
+  width:100%
+  height:22px
+  background:#33072a
+  position:fixed
+  bottom:0
+
+
+
 
  
 

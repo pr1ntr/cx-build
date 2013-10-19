@@ -8,7 +8,7 @@
             "name": "jadedemo",
             "db" : {},
             "views" : "/source/apps/jadedemo/templates/",
-            "layout" : "layout/index",
+            "layout" : "main",
             "paths": [
                
                 {
@@ -16,13 +16,13 @@
                     "public": "/",
                     "view" : "news",
                     "data" : {
-                        "json" : "/source/apps/jadedemo/data/home.json",
-                        "webservice" : "http://"
+                        "url" : "http://localhost:1923/data/news.json"
+           
                     },
                     "js": [
                         {
-                            "path": "js/main.js",
-                            "src": "/source/apps/jadedemo/main.coffee"
+                            "path": "js/news.js",
+                            "src": "/source/apps/jadedemo/com/news.coffee"
                         }
                     ],
                     "css": [
@@ -31,18 +31,38 @@
                         }
                     ]
                 },
-                 {
-                    "route": "/",
+                {
+                    "route": "/press",
                     "public": "/",
-                    "view" : "home",
+                    "view" : "press",
                     "data" : {
-                        "json" : "/source/apps/jadedemo/data/index.json",
-                        "webservice" : "http://"
+                        "url" : "http://localhost:1923/data/press.json"
+                     
                     },
                     "js": [
                         {
-                            "path": "js/main.js",
-                            "src": "/source/apps/jadedemo/main.coffee"
+                            "path": "js/press.js",
+                            "src": "/source/apps/jadedemo/com/press.coffee"
+                        }
+                    ],
+                    "css": [
+                        {
+                            "src": "/source/apps/jadedemo"
+                        }
+                    ]
+                },
+                {
+                    "route": "^\\/(?:home)?|^$",
+                    "public": "/",
+                    "view" : "home",
+                    "data" : {
+                        "url" : "http://localhost:1923/data/home.json"
+                    
+                    },
+                    "js": [
+                        {
+                            "path": "js/home.js",
+                            "src": "/source/apps/jadedemo/com/home.coffee"
                         }
                     ],
                     "css": [

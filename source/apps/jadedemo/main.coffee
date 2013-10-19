@@ -1,7 +1,7 @@
 #Backbone Requires
-#window._ = require('underscore');
-#window.Backbone = require('backbone');
-#Backbone.$ = $;
+window._ = require('underscore');
+window.Backbone = require('backbone');
+Backbone.$ = $;
 
 #Greensock Requires
 #require("./includes/greensock/TweenLite.min.js")
@@ -21,6 +21,8 @@ window.createjs = window.createjs or {}
 
 
 
+Router = require './com/Router.coffee'
+Nav = require './com/Nav.coffee'
 
 
 
@@ -29,7 +31,7 @@ if typeof Array.isArray isnt "function"
     Object::toString.call(arr) is "[object Array]"
 
     
-urlParam = (name) ->
+window.urlParam = (name) ->
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]")
     regexS = "[\\?&]" + name + "=([^&#]*)"
     regex = new RegExp(regexS)
@@ -38,6 +40,13 @@ urlParam = (name) ->
     	undefined 
     else
    		results[1]
+
+window.preventDefault = (e) ->
+    if e.preventDefault
+        e.preventDefault()
+    else
+        e.returnValue = false
+    
  
  
 if window.console is undefined or window.console is null
@@ -47,6 +56,9 @@ if window.console is undefined or window.console is null
         fatal: ->
 
 
+$(document).ready ->
+    console.log "Global Init"
+    new Router()
+    new Nav
+        el: "body"
 
-
-   
